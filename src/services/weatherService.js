@@ -2,10 +2,10 @@ import axiosInstance from "../axiosInstance";
 
 const key = import.meta.env.VITE_WEATHER_API_KEY;
 
-export const getCurrentWeather = async () => {
+export const getCurrentWeather = async (cityName) => {
     try {
         const { data } = await axiosInstance.get(
-            `/current.json?key=${key}&q=Plovdiv`
+            `/current.json?key=${key}&q=${cityName}`
         );
 
         return data;
@@ -15,10 +15,10 @@ export const getCurrentWeather = async () => {
     }
 };
 
-export const getForecast = async () => {
+export const getForecast = async (cityName) => {
     try {
         const { data } = await axiosInstance.get(
-            `/forecast.json?key=${key}&q=Plovdiv&days=7`
+            `/forecast.json?key=${key}&q=${cityName}&days=7`
         );
 
         return data;
