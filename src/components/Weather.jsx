@@ -24,7 +24,7 @@ export default function Weather({ cityName, degreesState }) {
     }
 
     return (
-        <>
+        <main className={classes.mainSection}>
             <div className={classes.currentDaySection}>
                 <div className={classes.dataContainer}>
                     <div className={classes.dataContainerName}>
@@ -54,7 +54,7 @@ export default function Weather({ cityName, degreesState }) {
                     />
                 </div>
             </div>
-            <div>
+            <div className={classes.todaysForecast}>
                 <h3>Today's Forecast:</h3>
                 <div>
                     <HourlyBreakdown
@@ -89,6 +89,6 @@ export default function Weather({ cityName, degreesState }) {
                     />
                 </div>
             </div>
-        </>
+        </main>
     );
 }

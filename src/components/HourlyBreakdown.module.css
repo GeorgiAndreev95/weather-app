@@ -1,0 +1,13 @@
+.hourly {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem;
+    margin: 1rem;
+    margin-top: 3rem;
+    border-right: 2.5px solid rgb(235, 235, 235);
+    border-bottom: 2.5px solid rgb(235, 235, 235);
+    border-radius: 16px;
+    color: white;
+}

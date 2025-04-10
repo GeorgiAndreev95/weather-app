@@ -11,8 +11,13 @@
     list-style-type: none;
 }
 
+:root {
+    /* --accent-color: #020536; */
+    --accent-color: linear-gradient(150deg, #022da3, #8bb3fd);
+}
+
 body {
     height: 100vh;
-    background: linear-gradient(150deg, #146857, #042924);
+    background: linear-gradient(150deg, #00ccff, #ffffff);
     font-family: "Roboto", sans-serif;
 }

@@ -22,6 +22,11 @@
     color: yellow;
 }
 
+.title img {
+    height: 7rem;
+    width: 7rem;
+}
+
 .menu {
     display: flex;
     justify-content: space-between;
@@ -32,9 +37,8 @@
     display: flex;
     align-items: center;
     background: white;
-    border: 1px solid #530053;
-    box-shadow: 2px 2px 2px;
-    border-radius: 8px;
+    /* box-shadow: 2px 2px 2px; */
+    border-radius: 18px;
     overflow: hidden;
     transition: 0.5s ease;
 }
@@ -80,18 +84,22 @@
 .degreeButton {
     all: unset;
     text-align: center;
+    color: white;
     height: 34px;
     width: 68px;
-    border-radius: 8px;
-    background: linear-gradient(150deg, #b44d1a, #eb7f49);
-    transition: 1s ease;
+    border: 2px solid #020536;
+    border-radius: 12px;
+    background: linear-gradient(150deg, #020536, #1c228f);
+    transition: 0.5s ease;
 }
 
 .degreeButton:hover {
-    background: linear-gradient(150deg, #dd5f20, #f7864d);
+    border: 2px solid #020536;
+    background: white;
+    color: #020536;
 }
 
 .degreeButton:active {
     box-shadow: inset 1px 1px 2px;
-    background: linear-gradient(150deg, #f16924, #ff9058);
+    background: linear-gradient(150deg, #020536, #1c228f);
 }

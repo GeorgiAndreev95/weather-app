@@ -1,10 +1,12 @@
+import classes from "./HourlyBreakdown.module.css";
+
 export default function HourlyBreakdown({
     currentWeatherData,
     degreesState,
     hour,
 }) {
     return (
-        <div>
+        <div className={classes.hourly}>
             <p>{hour}:00</p>
             <img
                 src={
