@@ -6,10 +6,12 @@
     height: 6rem;
     max-width: 80%;
     margin: 0 auto;
+    overflow: visible;
 }
 
 .header h1 {
     color: white;
+    cursor: pointer;
 }
 
 .title {
@@ -34,13 +36,16 @@
 }
 
 .searchForm {
+    position: relative;
     display: flex;
     align-items: center;
     background: white;
-    /* box-shadow: 2px 2px 2px; */
     border-radius: 18px;
-    overflow: hidden;
-    transition: 0.5s ease;
+    width: 250px;
+}
+
+.searchFormActive {
+    border-radius: 18px 18px 0 0;
 }
 
 .searchForm:focus-within,
@@ -58,6 +63,7 @@
     justify-content: center;
     border: none;
     background-color: white;
+    border-radius: 50%;
 }
 
 .icon:active {
@@ -76,6 +82,32 @@
     outline: none;
 }
 
+.suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background: white;
+    color: black;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 0 0 18px 18px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.suggestionItem {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.suggestionItem:hover {
+    background: #eee;
+}
+
 .degreeButtons button {
     font-family: "Roboto", sans-serif;
     font-weight: bold;
@@ -87,19 +119,18 @@
     color: white;
     height: 34px;
     width: 68px;
-    border: 2px solid #020536;
+    border: 2px solid #022da3;
     border-radius: 12px;
-    background: linear-gradient(150deg, #020536, #1c228f);
+    background: var(--accent-color);
     transition: 0.5s ease;
 }
 
 .degreeButton:hover {
     border: 2px solid #020536;
-    background: white;
-    color: #020536;
+    background: var(--accent-color);
 }
 
 .degreeButton:active {
     box-shadow: inset 1px 1px 2px;
-    background: linear-gradient(150deg, #020536, #1c228f);
+    background: linear-gradient(150deg, #001c68, #4284ff);
 }

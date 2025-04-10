@@ -15,14 +15,28 @@ export const getCurrentWeather = async (cityName) => {
     }
 };
 
-export const getForecast = async (cityName) => {
+export const getForecast = async (cityName, coutryName) => {
     try {
         const { data } = await axiosInstance.get(
-            `/forecast.json?key=${key}&q=${cityName}&days=7`
+            `/forecast.json?key=${key}&q=${cityName} ${coutryName}&days=7`
         );
 
         return data;
     } catch (error) {
         console.log(error);
+        throw error;
+    }
+};
+
+export const getAutocomplete = async (cityName) => {
+    try {
+        const { data } = await axiosInstance.get(
+            `http://api.weatherapi.com/v1/search.json?key=${key}&q=${cityName}`
+        );
+
+        return data;
+    } catch (error) {
+        console.log(error);
+        throw error;
     }
 };

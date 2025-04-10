@@ -14,7 +14,6 @@
     margin-top: 60px;
     color: white;
     padding: 1rem;
-    /* border: 2px solid var(--accent-color); */
     border-radius: 24px;
     background: var(--accent-color);
 }
@@ -39,6 +38,10 @@
     font-size: 3rem;
 }
 
+.imgContainer {
+    margin-right: 3rem;
+}
+
 .todaysForecast {
     display: flex;
     flex-direction: column;
@@ -47,7 +50,6 @@
     align-items: center;
     height: 300px;
     max-width: 1400px;
-    /* border: 2px solid var(--accent-color); */
     border-radius: 24px;
     background: var(--accent-color);
 }

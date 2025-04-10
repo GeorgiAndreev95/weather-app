@@ -1,27 +1,83 @@
-import classes from "./Header.module.css";
-import image from "../assets/sun.png";
+import { useEffect, useRef, useState } from "react";
 
-export default function Header({ onSubmitHandler, onSwapHandler }) {
+import classes from "./Header.module.css";
+import image from "../assets/sun-flare.png";
+import { getAutocomplete } from "../services/weatherService";
+
+export default function Header({
+    onSwapHandler,
+    setInputValue,
+    inputValue,
+    setCurrentSelectedCity,
+    setCurrentSelectedCountry,
+    degreesState,
+}) {
+    const lastChange = useRef();
+    const [suggestionResults, setSuggestionResults] = useState([]);
+    const [inputDisplayValue, setInputDisplayValue] = useState("");
+
+    useEffect(() => {
+        if (inputValue.length > 0) {
+            const fetchAutocompleteSuggestions = async () => {
+                const response = await getAutocomplete(inputValue);
+
+                setSuggestionResults(response);
+            };
+
+            fetchAutocompleteSuggestions();
+        }
+    }, [inputValue]);
+
+    const handleChange = (event) => {
+        const value = event.target.value;
+        setInputDisplayValue(value);
+
+        if (lastChange.current) {
+            clearTimeout(lastChange.current);
+        }
+
+        lastChange.current = setTimeout(() => {
+            setInputValue(value);
+        }, 500);
+
+        if (value.length === 0) {
+            setSuggestionResults([]);
+        }
+    };
+
+    const handleClick = (cityName, countryName) => {
+        setCurrentSelectedCity(cityName);
+        setCurrentSelectedCountry(countryName);
+        setSuggestionResults([]);
+        setInputDisplayValue("");
+    };
+
+    const handleGoHome = () => {
+        setCurrentSelectedCity(undefined);
+        setSuggestionResults([]);
+        setInputValue("");
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+    };
+
     return (
         <div className={classes.header}>
             <div className={classes.title}>
-                {/* <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="size-6"
-                    width="60"
-                    height="60"
-                    stroke="orange"
-                >
-                    <path d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.166a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5H21a.75.75 0 0 1 .75.75ZM17.834 18.894a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 1 0-1.061 1.06l1.59 1.591ZM12 18a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18ZM7.758 17.303a.75.75 0 0 0-1.061-1.06l-1.591 1.59a.75.75 0 0 0 1.06 1.061l1.591-1.59ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12ZM6.697 7.757a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 0 0-1.061 1.06l1.59 1.591Z" />
-                </svg> */}
-                <img src={image} alt="" />
+                <img src={image} alt="A cartoony picture of the sun" />
 
-                <h1>Weather App</h1>
+                <h1 onClick={handleGoHome}>Weather App</h1>
             </div>
             <div className={classes.menu}>
-                <form className={classes.searchForm} onSubmit={onSubmitHandler}>
+                <form
+                    className={`${classes.searchForm} ${
+                        suggestionResults.length > 0
+                            ? classes.searchFormActive
+                            : ""
+                    }`}
+                    onSubmit={handleSubmit}
+                >
                     <button type="submit" className={classes.icon}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -46,15 +102,52 @@ export default function Header({ onSubmitHandler, onSwapHandler }) {
                         placeholder="Search city..."
                         className={classes.searchBox}
                         autoComplete="off"
+                        onChange={handleChange}
+                        value={inputDisplayValue}
                         required
                     />
+                    {suggestionResults.length > 0 && (
+                        <ul className={classes.suggestions}>
+                            {suggestionResults.map((city) => (
+                                <li
+                                    key={city.id}
+                                    onClick={() =>
+                                        handleClick(city.name, city.country)
+                                    }
+                                    className={classes.suggestionItem}
+                                >
+                                    {`${city.name}, ${city.country}`}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
                 </form>
                 <div className={classes.degreeButtons}>
                     <button
                         className={classes.degreeButton}
                         onClick={onSwapHandler}
                     >
-                        °C / °F
+                        <span
+                            style={{
+                                color:
+                                    degreesState === "C"
+                                        ? "rgb(255, 177,0)"
+                                        : "inherit",
+                            }}
+                        >
+                            °C
+                        </span>
+                        {" / "}
+                        <span
+                            style={{
+                                color:
+                                    degreesState === "F"
+                                        ? "rgb(255, 177,0)"
+                                        : "inherit",
+                            }}
+                        >
+                            °F
+                        </span>
                     </button>
                 </div>
             </div>
