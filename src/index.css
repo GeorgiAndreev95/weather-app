@@ -17,7 +17,10 @@
 }
 
 body {
-    height: 100vh;
+    min-height: 100vh;
     background: linear-gradient(150deg, #163da8, #b1e0ff);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
     font-family: "Roboto", sans-serif;
 }

@@ -6,13 +6,18 @@ import classes from "./Weather.module.css";
 import HourlyBreakdown from "./HourlyBreakdown";
 
 export default function Weather({
-    cityName = "Plovdiv",
+    cityName,
     countryName,
     degreesState,
+    error,
 }) {
     const [currentWeatherData, setCurrentWeatherData] = useState(null);
 
     useEffect(() => {
+        if (!cityName) {
+            return;
+        }
+
         const fetchCurrentWeatherData = async () => {
             const response = await getForecast(cityName, countryName);
             console.log(response);
@@ -22,6 +27,10 @@ export default function Weather({
 
         fetchCurrentWeatherData();
     }, [cityName, countryName]);
+
+    if (error) {
+        return <p style={{ color: "red" }}>{error}</p>;
+    }
 
     if (!currentWeatherData) {
         return <p>Fetching weather data...</p>;

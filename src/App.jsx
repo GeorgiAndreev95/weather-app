@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Weather from "./components/Weather";
@@ -9,11 +9,30 @@ function App() {
         useState(undefined);
     const [inputValue, setInputValue] = useState("");
     const [degreesState, setDegreesState] = useState("C");
+    const [error, setError] = useState(null);
 
     const onSwapHandler = () => {
         setDegreesState((prevState) => (prevState === "C" ? "F" : "C"));
         return degreesState;
     };
+
+    useEffect(() => {
+        if (!navigator.geolocation) {
+            setError("Geolocation is not supported by your browser.");
+            return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const { latitude, longitude } = position.coords;
+                setCurrentSelectedCity(`${latitude},${longitude}`);
+            },
+            (err) => {
+                setError(`Error: ${err.message}`);
+            }
+        );
+    }, []);
+    console.log(location);
 
     return (
         <>
@@ -27,6 +46,7 @@ function App() {
                 degreesState={degreesState}
             />
             <Weather
+                error={error}
                 cityName={currentSelectedCity}
                 countryName={currentSelectedCountry}
                 degreesState={degreesState}

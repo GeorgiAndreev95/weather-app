@@ -131,6 +131,5 @@
 }
 
 .degreeButton:active {
-    box-shadow: inset 1px 1px 2px;
     background: linear-gradient(150deg, #001c68, #4284ff);
 }
