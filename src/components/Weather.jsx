@@ -13,6 +13,9 @@ export default function Weather({
 }) {
     const [currentWeatherData, setCurrentWeatherData] = useState(null);
 
+    const hours = [6, 9, 12, 15, 18, 21];
+
+    console.log(cityName);
     useEffect(() => {
         if (!cityName) {
             return;
@@ -33,7 +36,13 @@ export default function Weather({
     }
 
     if (!currentWeatherData) {
-        return <p>Fetching weather data...</p>;
+        return (
+            <div className={classes.weatherLoader}>
+                <div className={classes.sun}></div>
+                <div className={classes.cloud}></div>
+                <p className={classes.fadingText}>Fetching weather data...</p>
+            </div>
+        );
     }
 
     return (
@@ -70,36 +79,14 @@ export default function Weather({
             <div className={classes.todaysForecast}>
                 <h3>Today's Forecast:</h3>
                 <div>
-                    <HourlyBreakdown
-                        currentWeatherData={currentWeatherData}
-                        degreesState={degreesState}
-                        hour={6}
-                    />
-                    <HourlyBreakdown
-                        currentWeatherData={currentWeatherData}
-                        degreesState={degreesState}
-                        hour={9}
-                    />
-                    <HourlyBreakdown
-                        currentWeatherData={currentWeatherData}
-                        degreesState={degreesState}
-                        hour={12}
-                    />
-                    <HourlyBreakdown
-                        currentWeatherData={currentWeatherData}
-                        degreesState={degreesState}
-                        hour={15}
-                    />
-                    <HourlyBreakdown
-                        currentWeatherData={currentWeatherData}
-                        degreesState={degreesState}
-                        hour={18}
-                    />
-                    <HourlyBreakdown
-                        currentWeatherData={currentWeatherData}
-                        degreesState={degreesState}
-                        hour={21}
-                    />
+                    {hours.map((hour) => (
+                        <HourlyBreakdown
+                            key={hour}
+                            currentWeatherData={currentWeatherData}
+                            degreesState={degreesState}
+                            hour={hour}
+                        />
+                    ))}
                 </div>
             </div>
         </main>
