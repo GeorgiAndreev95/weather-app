@@ -1,17 +1,22 @@
 .mainSection {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
+    justify-content: center;
+    width: 80%;
+    max-width: 80%;
+    margin: 0 auto;
 }
 
 .currentDaySection {
     display: flex;
     margin: 0 auto;
+    margin-top: 48px;
     justify-content: space-between;
     align-items: center;
     width: 972px;
+    min-width: 850px;
     max-width: 80%;
     height: 250px;
-    margin-top: 60px;
     color: white;
     padding: 2rem;
     border-radius: 24px;
@@ -24,6 +29,10 @@
     flex-direction: column;
 }
 
+.condition {
+    font-size: 22px;
+}
+
 .cityName {
     font-size: 2rem;
     font-weight: bold;
@@ -31,7 +40,7 @@
 
 .dataContainerTemp {
     margin-top: auto;
-    font-size: 3rem;
+    font-size: 48px;
 }
 
 .imgContainer {
@@ -45,6 +54,8 @@
     align-items: center;
     margin: 2rem auto;
     height: 300px;
+    width: 972px;
+    min-width: 850px;
     max-width: 80%;
     border-radius: 24px;
     background: var(--accent-color);
@@ -66,10 +77,11 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    margin: 2rem auto;
+    margin: 0 auto;
     margin-top: 0;
     height: 300px;
     width: 972px;
+    min-width: 850px;
     max-width: 80%;
     color: white;
     border-radius: 24px;
@@ -119,6 +131,27 @@
 .airConditions img {
     height: 2rem;
     width: 2rem;
+}
+
+/* 7-day forecast */
+
+.sevenDayForecast {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 3rem;
+    width: 480px;
+    max-width: 80%;
+    color: white;
+    border-radius: 24px;
+    background: var(--accent-color);
+}
+
+.sevenDayForecast h3 {
+    align-self: flex-start;
+    margin-left: 2rem;
+    margin-top: 1rem;
 }
 
 /* Loader code below */

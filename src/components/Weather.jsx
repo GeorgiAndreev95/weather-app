@@ -8,6 +8,7 @@ import waterDropImg from "../assets/water-drop.png";
 import windImg from "../assets/wind.png";
 import sunImg from "../assets/sun-icon.png";
 import HourlyBreakdown from "./HourlyBreakdown";
+import DailyBreakdown from "./DailyBreakdown";
 
 export default function Weather({
     cityName,
@@ -18,6 +19,7 @@ export default function Weather({
     const [currentWeatherData, setCurrentWeatherData] = useState(null);
 
     const hours = [6, 9, 12, 15, 18, 21];
+    const days = [0, 1, 2, 3, 4, 5, 6];
 
     useEffect(() => {
         if (!cityName) {
@@ -50,94 +52,112 @@ export default function Weather({
 
     return (
         <main className={classes.mainSection}>
-            <div className={classes.currentDaySection}>
-                <div className={classes.dataContainer}>
-                    <div className={classes.dataContainerName}>
-                        <p className={classes.cityName}>
-                            {currentWeatherData.location.name}
+            <div>
+                <div className={classes.currentDaySection}>
+                    <div className={classes.dataContainer}>
+                        <div className={classes.dataContainerName}>
+                            <p className={classes.cityName}>
+                                {currentWeatherData.location.name}
+                            </p>
+                            <p>{currentWeatherData.location.country}</p>
+                        </div>
+                        <div className={classes.dataContainerTemp}>
+                            <p>
+                                {`${
+                                    degreesState === "C"
+                                        ? `${currentWeatherData.current.temp_c} °C`
+                                        : `${currentWeatherData.current.temp_f} °F`
+                                }`}
+                            </p>
+                        </div>
+                        <p className={classes.condition}>
+                            {currentWeatherData.current.condition.text}
                         </p>
-                        <p>{currentWeatherData.location.country}</p>
                     </div>
-                    <div className={classes.dataContainerTemp}>
-                        <p>
-                            {`${
-                                degreesState === "C"
-                                    ? `${currentWeatherData.current.temp_c} °C`
-                                    : `${currentWeatherData.current.temp_f} °F`
-                            }`}
-                        </p>
-                    </div>
-                </div>
 
-                <div className={classes.imgContainer}>
-                    <img
-                        src={currentWeatherData.current.condition.icon.replace(
-                            "64x64",
-                            "128x128"
-                        )}
-                        alt="A picture of the current weather conditions"
-                    />
-                </div>
-            </div>
-            <div className={classes.todaysForecast}>
-                <h3>Today's Forecast</h3>
-                <div>
-                    {hours.map((hour) => (
-                        <HourlyBreakdown
-                            key={hour}
-                            currentWeatherData={currentWeatherData}
-                            degreesState={degreesState}
-                            hour={hour}
+                    <div className={classes.imgContainer}>
+                        <img
+                            src={currentWeatherData.current.condition.icon.replace(
+                                "64x64",
+                                "128x128"
+                            )}
                         />
-                    ))}
+                    </div>
+                </div>
+                <div className={classes.todaysForecast}>
+                    <h3>Today's Forecast</h3>
+                    <div>
+                        {hours.map((hour) => (
+                            <HourlyBreakdown
+                                key={hour}
+                                currentWeatherData={currentWeatherData}
+                                degreesState={degreesState}
+                                hour={hour}
+                            />
+                        ))}
+                    </div>
+                </div>
+
+                <div className={classes.airConditions}>
+                    <div className={classes.airConditionsTitle}>
+                        <h3>Air Conditions</h3>
+                        <button type="button">See more</button>
+                    </div>
+                    <div className={classes.airConditionsInfo}>
+                        <div className={classes.airConditionsInfoSegment}>
+                            <div className={classes.conditionItem}>
+                                <p className={classes.conditionLabel}>
+                                    <img src={thermometerImg} /> Feels Like
+                                </p>
+                                <p className={classes.conditionValue}>
+                                    {degreesState === "C"
+                                        ? `${currentWeatherData.current.feelslike_c} °C`
+                                        : `${currentWeatherData.current.feelslike_f} °F`}
+                                </p>
+                            </div>
+                            <div className={classes.conditionItem}>
+                                <p className={classes.conditionLabel}>
+                                    <img src={windImg} /> Wind
+                                </p>
+                                <p className={classes.conditionValue}>
+                                    {degreesState === "C"
+                                        ? `${currentWeatherData.current.wind_kph} km/h`
+                                        : `${currentWeatherData.current.wind_mph} mph`}
+                                </p>
+                            </div>
+                        </div>
+                        <div className={classes.airConditionsInfoSegment}>
+                            <div className={classes.conditionItem}>
+                                <p className={classes.conditionLabel}>
+                                    <img src={waterDropImg} /> Chance of Rain
+                                </p>
+                                <p className={classes.conditionValue}>
+                                    {`${currentWeatherData.forecast.forecastday[0].day.daily_chance_of_rain}%`}
+                                </p>
+                            </div>
+                            <div className={classes.conditionItem}>
+                                <p className={classes.conditionLabel}>
+                                    <img src={sunImg} /> UV Index
+                                </p>
+                                <p className={classes.conditionValue}>
+                                    {currentWeatherData.current.uv}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div className={classes.airConditions}>
-                <div className={classes.airConditionsTitle}>
-                    <h3>Air Conditions</h3>
-                    <button type="button">See more</button>
-                </div>
-                <div className={classes.airConditionsInfo}>
-                    <div className={classes.airConditionsInfoSegment}>
-                        <div className={classes.conditionItem}>
-                            <p className={classes.conditionLabel}>
-                                <img src={thermometerImg} /> Feels Like
-                            </p>
-                            <p className={classes.conditionValue}>
-                                {degreesState === "C"
-                                    ? `${currentWeatherData.current.feelslike_c} °C`
-                                    : `${currentWeatherData.current.feelslike_f} °F`}
-                            </p>
-                        </div>
-                        <div className={classes.conditionItem}>
-                            <p className={classes.conditionLabel}>
-                                <img src={windImg} /> Wind
-                            </p>
-                            <p className={classes.conditionValue}>
-                                {`${currentWeatherData.current.wind_kph} km/h`}
-                            </p>
-                        </div>
-                    </div>
-                    <div className={classes.airConditionsInfoSegment}>
-                        <div className={classes.conditionItem}>
-                            <p className={classes.conditionLabel}>
-                                <img src={waterDropImg} /> Chance of Rain
-                            </p>
-                            <p className={classes.conditionValue}>
-                                {`${currentWeatherData.forecast.forecastday[0].day.daily_chance_of_rain}%`}
-                            </p>
-                        </div>
-                        <div className={classes.conditionItem}>
-                            <p className={classes.conditionLabel}>
-                                <img src={sunImg} /> UV Index
-                            </p>
-                            <p className={classes.conditionValue}>
-                                {currentWeatherData.current.uv}
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <div className={classes.sevenDayForecast}>
+                <h3>7-Day Forecast</h3>
+                {days.map((day) => (
+                    <DailyBreakdown
+                        key={day}
+                        currentWeatherData={currentWeatherData}
+                        degreesState={degreesState}
+                        day={day}
+                    />
+                ))}
             </div>
         </main>
     );

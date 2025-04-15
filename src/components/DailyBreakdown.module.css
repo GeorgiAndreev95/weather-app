@@ -1,0 +1,21 @@
+.daily {
+    display: flex;
+    justify-content: space-between;
+    width: 450px;
+    align-items: center;
+    padding: 1rem 2rem;
+    color: white;
+}
+
+.daily:last-of-type {
+    border: none;
+}
+
+.daily div {
+    display: flex;
+    align-items: center;
+}
+
+.degrees {
+    width: 85px;
+}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./App.css";
+
 import Header from "./components/Header";
 import Weather from "./components/Weather";
 
@@ -32,7 +32,6 @@ function App() {
             }
         );
     }, []);
-    console.log(location);
 
     return (
         <>

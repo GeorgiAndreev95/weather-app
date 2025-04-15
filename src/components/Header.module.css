@@ -4,9 +4,15 @@
     justify-content: space-between;
     padding: 1rem 2rem;
     height: 6rem;
-    max-width: 80%;
+    max-width: 65%;
     margin: 0 auto;
     overflow: visible;
+}
+
+@media (width <= 1920px) {
+    .header {
+        max-width: 70%;
+    }
 }
 
 .header h1 {
@@ -41,7 +47,7 @@
     align-items: center;
     background: white;
     border-radius: 18px;
-    width: 250px;
+    width: 15.5rem;
 }
 
 .searchFormActive {
@@ -108,17 +114,15 @@
     background: #eee;
 }
 
-.degreeButtons button {
-    font-family: "Roboto", sans-serif;
-    font-weight: bold;
-}
-
 .degreeButton {
     all: unset;
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
     text-align: center;
     color: white;
-    height: 34px;
-    width: 68px;
+    height: 2.1rem;
+    width: 4.2rem;
     border: 2px solid #022da3;
     border-radius: 12px;
     background: var(--accent-color);
