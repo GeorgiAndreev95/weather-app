@@ -13,6 +13,10 @@ export default function HourlyBreakdown({
                     currentWeatherData.forecast.forecastday[0].hour[hour]
                         .condition.icon
                 }
+                alt={
+                    currentWeatherData.forecast.forecastday[0].hour[hour]
+                        .condition.text
+                }
             />
             <p>
                 {`${

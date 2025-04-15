@@ -8,12 +8,12 @@
     margin: 0 auto;
     justify-content: space-between;
     align-items: center;
-    width: 800px;
+    width: 972px;
     max-width: 80%;
     height: 250px;
     margin-top: 60px;
     color: white;
-    padding: 1rem;
+    padding: 2rem;
     border-radius: 24px;
     background: var(--accent-color);
 }
@@ -22,10 +22,6 @@
     display: flex;
     height: 100%;
     flex-direction: column;
-}
-
-.dataContainer p {
-    padding: 0.5rem;
 }
 
 .cityName {
@@ -46,23 +42,83 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    margin: 2rem auto;
     align-items: center;
+    margin: 2rem auto;
     height: 300px;
     max-width: 80%;
     border-radius: 24px;
     background: var(--accent-color);
     overflow: hidden;
+    color: white;
 }
 
 .todaysForecast h3 {
     align-self: flex-start;
     margin-left: 2rem;
-    color: white;
 }
 
 .todaysForecast div {
     display: flex;
+}
+
+.airConditions {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 2rem auto;
+    margin-top: 0;
+    height: 300px;
+    width: 972px;
+    max-width: 80%;
+    color: white;
+    border-radius: 24px;
+    background: var(--accent-color);
+}
+
+.airConditionsTitle {
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+    align-self: flex-start;
+    margin-left: 2rem;
+}
+
+.airConditionsInfo {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    justify-content: space-between;
+}
+
+.airConditionsInfoSegment {
+    display: flex;
+    justify-content: space-between;
+    margin: 1.5rem 0;
+}
+
+.conditionItem {
+    display: flex;
+    flex-direction: column;
+    min-width: 30%;
+}
+
+.conditionLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.conditionValue {
+    margin-left: 2.5rem;
+    font-weight: 500;
+    font-size: 1.4rem;
+}
+
+.airConditions img {
+    height: 2rem;
+    width: 2rem;
 }
 
 /* Loader code below */
@@ -97,7 +153,7 @@
     z-index: 2;
     left: 75px;
     top: 55px;
-    box-shadow: -20px 0 #fff, -10px -10px #fff, 10px -5px #fff;
+    box-shadow: -20px 0 #fff, -10px -10px #fff, 10px -3px #fff;
 }
 
 .fadingText {

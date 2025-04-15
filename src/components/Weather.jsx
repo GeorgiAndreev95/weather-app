@@ -3,6 +3,10 @@ import { useState } from "react";
 
 import { getForecast } from "../services/weatherService";
 import classes from "./Weather.module.css";
+import thermometerImg from "../assets/thermometer.png";
+import waterDropImg from "../assets/water-drop.png";
+import windImg from "../assets/wind.png";
+import sunImg from "../assets/sun-icon.png";
 import HourlyBreakdown from "./HourlyBreakdown";
 
 export default function Weather({
@@ -15,7 +19,6 @@ export default function Weather({
 
     const hours = [6, 9, 12, 15, 18, 21];
 
-    console.log(cityName);
     useEffect(() => {
         if (!cityName) {
             return;
@@ -77,7 +80,7 @@ export default function Weather({
                 </div>
             </div>
             <div className={classes.todaysForecast}>
-                <h3>Today's Forecast:</h3>
+                <h3>Today's Forecast</h3>
                 <div>
                     {hours.map((hour) => (
                         <HourlyBreakdown
@@ -87,6 +90,53 @@ export default function Weather({
                             hour={hour}
                         />
                     ))}
+                </div>
+            </div>
+
+            <div className={classes.airConditions}>
+                <div className={classes.airConditionsTitle}>
+                    <h3>Air Conditions</h3>
+                    <button type="button">See more</button>
+                </div>
+                <div className={classes.airConditionsInfo}>
+                    <div className={classes.airConditionsInfoSegment}>
+                        <div className={classes.conditionItem}>
+                            <p className={classes.conditionLabel}>
+                                <img src={thermometerImg} /> Feels Like
+                            </p>
+                            <p className={classes.conditionValue}>
+                                {degreesState === "C"
+                                    ? `${currentWeatherData.current.feelslike_c} °C`
+                                    : `${currentWeatherData.current.feelslike_f} °F`}
+                            </p>
+                        </div>
+                        <div className={classes.conditionItem}>
+                            <p className={classes.conditionLabel}>
+                                <img src={windImg} /> Wind
+                            </p>
+                            <p className={classes.conditionValue}>
+                                {`${currentWeatherData.current.wind_kph} km/h`}
+                            </p>
+                        </div>
+                    </div>
+                    <div className={classes.airConditionsInfoSegment}>
+                        <div className={classes.conditionItem}>
+                            <p className={classes.conditionLabel}>
+                                <img src={waterDropImg} /> Chance of Rain
+                            </p>
+                            <p className={classes.conditionValue}>
+                                {`${currentWeatherData.forecast.forecastday[0].day.daily_chance_of_rain}%`}
+                            </p>
+                        </div>
+                        <div className={classes.conditionItem}>
+                            <p className={classes.conditionLabel}>
+                                <img src={sunImg} /> UV Index
+                            </p>
+                            <p className={classes.conditionValue}>
+                                {currentWeatherData.current.uv}
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
