@@ -26,10 +26,6 @@
     align-items: center;
 }
 
-.title svg {
-    color: yellow;
-}
-
 .title img {
     height: 7rem;
     width: 7rem;
@@ -72,10 +68,6 @@
     border-radius: 50%;
 }
 
-.icon:active {
-    color: black;
-}
-
 .searchBox {
     padding: 0.5rem;
     font-size: 1rem;
@@ -114,26 +106,28 @@
     background: #eee;
 }
 
+.focused {
+    background-color: #eee;
+    cursor: pointer;
+}
+
 .degreeButton {
     all: unset;
     font-family: "Roboto", sans-serif;
-    font-weight: bold;
+    font-weight: 450;
     font-size: 1rem;
     text-align: center;
-    color: white;
+    color: #163da8;
     height: 2.1rem;
     width: 4.2rem;
-    border: 2px solid #022da3;
     border-radius: 12px;
-    background: var(--accent-color);
-    transition: 0.5s ease;
+    background: white;
 }
 
 .degreeButton:hover {
-    border: 2px solid #020536;
-    background: var(--accent-color);
+    cursor: pointer;
 }
 
 .degreeButton:active {
-    background: linear-gradient(150deg, #001c68, #4284ff);
+    background: rgb(240, 240, 240);
 }

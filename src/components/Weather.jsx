@@ -9,6 +9,7 @@ import windImg from "../assets/wind.png";
 import sunImg from "../assets/sun-icon.png";
 import HourlyBreakdown from "./HourlyBreakdown";
 import DailyBreakdown from "./DailyBreakdown";
+import SeeMore from "./SeeMore";
 
 export default function Weather({
     cityName,
@@ -146,6 +147,11 @@ export default function Weather({
                         </div>
                     </div>
                 </div>
+
+                <SeeMore
+                    currentWeatherData={currentWeatherData}
+                    degreesState={degreesState}
+                />
             </div>
 
             <div className={classes.sevenDayForecast}>

@@ -11,8 +11,10 @@ export default function Header({
     setCurrentSelectedCity,
     setCurrentSelectedCountry,
     degreesState,
+    onGoHome,
 }) {
     const lastChange = useRef();
+    const [focusedIndex, setFocusedIndex] = useState(-1);
     const [suggestionResults, setSuggestionResults] = useState([]);
     const [inputDisplayValue, setInputDisplayValue] = useState("");
 
@@ -29,6 +31,8 @@ export default function Header({
     }, [inputValue]);
 
     const handleChange = (event) => {
+        setInputValue("");
+        setFocusedIndex(-1);
         const value = event.target.value;
         setInputDisplayValue(value);
 
@@ -53,19 +57,40 @@ export default function Header({
     };
 
     const handleGoHome = () => {
-        setCurrentSelectedCity(undefined);
         setSuggestionResults([]);
         setInputValue("");
+        setInputDisplayValue("");
+        onGoHome();
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
     };
 
+    const keyDownHandler = (event) => {
+        if (suggestionResults.length === 0) return;
+
+        if (event.key === "ArrowDown") {
+            event.preventDefault();
+            setFocusedIndex(
+                (prevIndex) => (prevIndex + 1) % suggestionResults.length
+            );
+        } else if (event.key === "ArrowUp") {
+            event.preventDefault();
+            setFocusedIndex((prevIndex) =>
+                prevIndex <= 0 ? suggestionResults.length - 1 : prevIndex - 1
+            );
+        } else if (event.key === "Enter" && focusedIndex >= 0) {
+            event.preventDefault();
+            const selectedCity = suggestionResults[focusedIndex];
+            handleClick(selectedCity.name, selectedCity.country);
+        }
+    };
+
     return (
         <div className={classes.header}>
             <div className={classes.title}>
-                <img src={image} alt="A cartoony picture of the sun" />
+                <img src={image} alt="A picture of the sun" />
 
                 <h1 onClick={handleGoHome}>Weather App</h1>
             </div>
@@ -78,7 +103,7 @@ export default function Header({
                     }`}
                     onSubmit={handleSubmit}
                 >
-                    <button type="submit" className={classes.icon}>
+                    <div className={classes.icon}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="20"
@@ -94,7 +119,7 @@ export default function Header({
                                 d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"
                             />
                         </svg>
-                    </button>
+                    </div>
 
                     <input
                         type="text"
@@ -103,18 +128,23 @@ export default function Header({
                         className={classes.searchBox}
                         autoComplete="off"
                         onChange={handleChange}
+                        onKeyDown={keyDownHandler}
                         value={inputDisplayValue}
                         required
                     />
                     {suggestionResults.length > 0 && (
                         <ul className={classes.suggestions}>
-                            {suggestionResults.map((city) => (
+                            {suggestionResults.map((city, index) => (
                                 <li
                                     key={city.id}
                                     onClick={() =>
                                         handleClick(city.name, city.country)
                                     }
-                                    className={classes.suggestionItem}
+                                    className={`${classes.suggestionItem} ${
+                                        focusedIndex === index
+                                            ? classes.focused
+                                            : ""
+                                    }`}
                                 >
                                     {`${city.name}, ${city.country}`}
                                 </li>

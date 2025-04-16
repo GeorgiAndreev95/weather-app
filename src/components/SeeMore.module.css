@@ -1,0 +1,9 @@
+.seeMore {
+    display: flex;
+    flex-direction: column;
+}
+
+.images img {
+    height: 2rem;
+    width: 2rem;
+}

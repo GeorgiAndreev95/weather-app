@@ -16,7 +16,7 @@ function App() {
         return degreesState;
     };
 
-    useEffect(() => {
+    const handleGeolocation = () => {
         if (!navigator.geolocation) {
             setError("Geolocation is not supported by your browser.");
             return;
@@ -26,11 +26,16 @@ function App() {
             (position) => {
                 const { latitude, longitude } = position.coords;
                 setCurrentSelectedCity(`${latitude},${longitude}`);
+                setCurrentSelectedCountry(undefined);
             },
             (err) => {
                 setError(`Error: ${err.message}`);
             }
         );
+    };
+
+    useEffect(() => {
+        handleGeolocation();
     }, []);
 
     return (
@@ -43,6 +48,7 @@ function App() {
                 setInputValue={setInputValue}
                 inputValue={inputValue}
                 degreesState={degreesState}
+                onGoHome={handleGeolocation}
             />
             <Weather
                 error={error}
