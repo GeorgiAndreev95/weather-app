@@ -1,10 +1,17 @@
 .daily {
     display: flex;
-    justify-content: space-between;
     width: 450px;
     align-items: center;
     padding: 1rem 2rem;
     color: white;
+}
+
+.daily img {
+    margin-right: 0.5rem;
+}
+
+.day {
+    width: 3rem;
 }
 
 .daily:last-of-type {
@@ -14,6 +21,9 @@
 .daily div {
     display: flex;
     align-items: center;
+    max-width: 50%;
+    margin-left: 30px;
+    margin-right: auto;
 }
 
 .degrees {

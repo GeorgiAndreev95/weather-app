@@ -19,6 +19,7 @@ export default function Weather({
 }) {
     const [currentWeatherData, setCurrentWeatherData] = useState(null);
 
+    const lng = localStorage.getItem("lng");
     const hours = [6, 9, 12, 15, 18, 21];
     const days = [0, 1, 2, 3, 4, 5, 6];
 
@@ -29,13 +30,12 @@ export default function Weather({
 
         const fetchCurrentWeatherData = async () => {
             const response = await getForecast(cityName, countryName);
-            console.log(response);
 
             setCurrentWeatherData(response);
         };
 
         fetchCurrentWeatherData();
-    }, [cityName, countryName]);
+    }, [cityName, countryName, lng]);
 
     if (error) {
         return <p style={{ color: "red" }}>{error}</p>;
@@ -148,10 +148,10 @@ export default function Weather({
                     </div>
                 </div>
 
-                <SeeMore
+                {/* <SeeMore
                     currentWeatherData={currentWeatherData}
                     degreesState={degreesState}
-                />
+                /> */}
             </div>
 
             <div className={classes.sevenDayForecast}>

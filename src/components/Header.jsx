@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import classes from "./Header.module.css";
 import image from "../assets/sun-flare.png";
 import { getAutocomplete } from "../services/weatherService";
+import useLanguage from "../hooks/useLanguage";
 
 export default function Header({
     onSwapHandler,
@@ -12,7 +14,9 @@ export default function Header({
     setCurrentSelectedCountry,
     degreesState,
     onGoHome,
+    onToggle,
 }) {
+    const { t } = useTranslation();
     const lastChange = useRef();
     const [focusedIndex, setFocusedIndex] = useState(-1);
     const [suggestionResults, setSuggestionResults] = useState([]);
@@ -87,12 +91,30 @@ export default function Header({
         }
     };
 
+    const { changeSelectedLanguage } = useLanguage();
+
     return (
         <div className={classes.header}>
             <div className={classes.title}>
                 <img src={image} alt="A picture of the sun" />
 
-                <h1 onClick={handleGoHome}>Weather App</h1>
+                <h1 onClick={handleGoHome}>{t("headerTitle")}</h1>
+                <button
+                    onClick={() => {
+                        changeSelectedLanguage("bg");
+                        onToggle();
+                    }}
+                >
+                    BG
+                </button>
+                <button
+                    onClick={() => {
+                        changeSelectedLanguage("en");
+                        onToggle();
+                    }}
+                >
+                    EN
+                </button>
             </div>
             <div className={classes.menu}>
                 <form
@@ -124,7 +146,7 @@ export default function Header({
                     <input
                         type="text"
                         name="search"
-                        placeholder="Search city..."
+                        placeholder={t("inputPlaceholder")}
                         className={classes.searchBox}
                         autoComplete="off"
                         onChange={handleChange}

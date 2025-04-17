@@ -4,11 +4,17 @@ const key = import.meta.env.VITE_WEATHER_API_KEY;
 
 export const getForecast = async (cityName, coutryName) => {
     const query = coutryName ? `${cityName} ${coutryName}` : cityName;
+    const language = localStorage.getItem("lng");
+    let url = `/forecast.json?key=${key}&q=${query}&days=7`;
+
+    if (language !== "en") {
+        url += `&lang=${language}`;
+        console.log("Hi");
+    }
+    console.log(url);
 
     try {
-        const { data } = await axiosInstance.get(
-            `/forecast.json?key=${key}&q=${query}&days=7`
-        );
+        const { data } = await axiosInstance.get(url);
 
         return data;
     } catch (error) {
@@ -20,7 +26,7 @@ export const getForecast = async (cityName, coutryName) => {
 export const getAutocomplete = async (cityName) => {
     try {
         const { data } = await axiosInstance.get(
-            `http://api.weatherapi.com/v1/search.json?key=${key}&q=${cityName}`
+            `/search.json?key=${key}&q=${cityName}`
         );
 
         return data;

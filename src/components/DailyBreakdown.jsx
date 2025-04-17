@@ -1,20 +1,27 @@
 import classes from "./DailyBreakdown.module.css";
+import { useTranslation } from "react-i18next";
 
 export default function DailyBreakdown({
     currentWeatherData,
     degreesState,
     day,
 }) {
+    const { t } = useTranslation();
     const date = new Date(currentWeatherData.forecast.forecastday[day].date);
+    const lng = localStorage.getItem("lng");
     let weekday = date.toLocaleDateString("en-US", { weekday: "short" });
 
+    if (lng === "bg") {
+        weekday = date.toLocaleDateString("bg-BG", { weekday: "short" });
+    }
+
     if (day === 0) {
-        weekday = "Today";
+        weekday = t("today");
     }
 
     return (
         <div className={classes.daily}>
-            <p>{weekday}</p>
+            <p className={classes.day}>{weekday}</p>
             <div>
                 <img
                     src={
