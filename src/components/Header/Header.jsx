@@ -21,7 +21,6 @@ export default function Header({
     const [focusedIndex, setFocusedIndex] = useState(-1);
     const [suggestionResults, setSuggestionResults] = useState([]);
     const [inputDisplayValue, setInputDisplayValue] = useState("");
-    const [isSelected, setIsSelected] = useState(false);
     const lng = localStorage.getItem("lng");
 
     useEffect(() => {
@@ -91,10 +90,6 @@ export default function Header({
             const selectedCity = suggestionResults[focusedIndex];
             handleClick(selectedCity.name, selectedCity.country);
         }
-    };
-
-    const selectLanguageHandler = () => {
-        setIsSelected((currValue) => !currValue);
     };
 
     const { changeSelectedLanguage } = useLanguage();
@@ -192,7 +187,7 @@ export default function Header({
                         </span>
                     </button>
                     <button
-                        disabled={isSelected}
+                        disabled={lng === "bg"}
                         className={
                             lng === "bg"
                                 ? `${classes.selected} ${classes.languageButtonLeft}`
@@ -201,13 +196,12 @@ export default function Header({
                         onClick={() => {
                             changeSelectedLanguage("bg");
                             onToggle();
-                            selectLanguageHandler();
                         }}
                     >
                         BG
                     </button>
                     <button
-                        disabled={!isSelected}
+                        disabled={!lng || lng === "en"}
                         className={
                             !lng || lng === "en"
                                 ? `${classes.selected} ${classes.languageButtonRight}`
@@ -216,7 +210,6 @@ export default function Header({
                         onClick={() => {
                             changeSelectedLanguage("en");
                             onToggle();
-                            selectLanguageHandler();
                         }}
                     >
                         EN
