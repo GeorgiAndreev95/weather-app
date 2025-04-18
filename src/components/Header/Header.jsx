@@ -22,6 +22,7 @@ export default function Header({
     const [suggestionResults, setSuggestionResults] = useState([]);
     const [inputDisplayValue, setInputDisplayValue] = useState("");
     const [isSelected, setIsSelected] = useState(false);
+    const lng = localStorage.getItem("lng");
 
     useEffect(() => {
         if (inputValue.length > 0) {
@@ -191,8 +192,9 @@ export default function Header({
                         </span>
                     </button>
                     <button
+                        disabled={isSelected}
                         className={
-                            isSelected
+                            lng === "bg"
                                 ? `${classes.selected} ${classes.languageButtonLeft}`
                                 : classes.languageButtonLeft
                         }
@@ -205,8 +207,9 @@ export default function Header({
                         BG
                     </button>
                     <button
+                        disabled={!isSelected}
                         className={
-                            !isSelected
+                            !lng || lng === "en"
                                 ? `${classes.selected} ${classes.languageButtonRight}`
                                 : classes.languageButtonRight
                         }
