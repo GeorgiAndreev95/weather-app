@@ -1,0 +1,91 @@
+.seeMore {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    background: var(--accent-color);
+    padding: 2rem;
+    border-radius: 1.5rem;
+    width: 700px;
+}
+
+.item {
+    display: flex;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.item p {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.item p:last-of-type {
+    margin-left: 0.5rem;
+}
+
+.images {
+    height: 2rem;
+    width: 2rem;
+}
+
+.wind {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.windChild {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.windChild .item {
+    flex: 0 0 50%;
+}
+
+.atmosphere {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+
+.atmosphereChild {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.atmosphereChild .item {
+    flex: 0 0 50%;
+}
+
+.rain {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+
+.rainChild {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.rainChild .item {
+    flex: 0 0 50%;
+}
+
+.astro {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.astroChild {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.astroChild .item {
+    flex: 0 0 50%;
+}

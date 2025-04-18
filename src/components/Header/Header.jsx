@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import classes from "./Header.module.css";
-import image from "../assets/sun-flare.png";
-import { getAutocomplete } from "../services/weatherService";
-import useLanguage from "../hooks/useLanguage";
+import image from "../../assets/sun-flare.png";
+import { getAutocomplete } from "../../services/weatherService";
+import useLanguage from "../../hooks/useLanguage";
 
 export default function Header({
     onSwapHandler,

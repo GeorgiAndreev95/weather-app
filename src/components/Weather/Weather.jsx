@@ -1,15 +1,17 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import { getForecast } from "../services/weatherService";
 import classes from "./Weather.module.css";
-import thermometerImg from "../assets/thermometer.png";
-import waterDropImg from "../assets/water-drop.png";
-import windImg from "../assets/wind.png";
-import sunImg from "../assets/sun-icon.png";
-import HourlyBreakdown from "./HourlyBreakdown";
-import DailyBreakdown from "./DailyBreakdown";
-import SeeMore from "./SeeMore";
+import thermometerImg from "../../assets/thermometer.svg";
+import waterDropImg from "../../assets/water-drop.svg";
+import windImg from "../../assets/wind.svg";
+import sunImg from "../../assets/sun-icon.svg";
+
+import { getForecast } from "../../services/weatherService";
+import HourlyBreakdown from "../HourlyBreakdown/HourlyBreakdown";
+import DailyBreakdown from "../DailyBreakdown/DailyBreakdown";
+import SeeMore from "../SeeMore/SeeMore";
+import Modal from "../Modal/Modal";
 
 export default function Weather({
     cityName,
@@ -17,11 +19,21 @@ export default function Weather({
     degreesState,
     error,
 }) {
+    const { t } = useTranslation();
     const [currentWeatherData, setCurrentWeatherData] = useState(null);
+    const [showMoreOpen, setShowMoreOpen] = useState(false);
 
     const lng = localStorage.getItem("lng");
     const hours = [6, 9, 12, 15, 18, 21];
     const days = [0, 1, 2, 3, 4, 5, 6];
+
+    const showMoreClickHandler = () => {
+        setShowMoreOpen(true);
+    };
+
+    const onDismiss = () => {
+        setShowMoreOpen(false);
+    };
 
     useEffect(() => {
         if (!cityName) {
@@ -46,10 +58,22 @@ export default function Weather({
             <div className={classes.weatherLoader}>
                 <div className={classes.sun}></div>
                 <div className={classes.cloud}></div>
-                <p className={classes.fadingText}>Fetching weather data...</p>
+                <p className={classes.fadingText}>{t("fetching")}</p>
             </div>
         );
     }
+
+    const { name, country } = currentWeatherData.location;
+    const { temp_c, temp_f, feelslike_c, feelslike_f, wind_kph, wind_mph, uv } =
+        currentWeatherData.current;
+    const { text, icon } = currentWeatherData.current.condition;
+    const { daily_chance_of_rain } =
+        currentWeatherData.forecast.forecastday[0].day;
+    const currentTemp = degreesState === "C" ? `${temp_c} °C` : `${temp_f} °F`;
+    const feelsLike =
+        degreesState === "C" ? `${feelslike_c} °C` : `${feelslike_f} °F`;
+    const windSpeed =
+        degreesState === "C" ? `${wind_kph} ${t("kmh")}` : `${wind_mph} mph`;
 
     return (
         <main className={classes.mainSection}>
@@ -57,36 +81,21 @@ export default function Weather({
                 <div className={classes.currentDaySection}>
                     <div className={classes.dataContainer}>
                         <div className={classes.dataContainerName}>
-                            <p className={classes.cityName}>
-                                {currentWeatherData.location.name}
-                            </p>
-                            <p>{currentWeatherData.location.country}</p>
+                            <p className={classes.cityName}>{name}</p>
+                            <p>{country}</p>
                         </div>
                         <div className={classes.dataContainerTemp}>
-                            <p>
-                                {`${
-                                    degreesState === "C"
-                                        ? `${currentWeatherData.current.temp_c} °C`
-                                        : `${currentWeatherData.current.temp_f} °F`
-                                }`}
-                            </p>
+                            <p>{currentTemp}</p>
                         </div>
-                        <p className={classes.condition}>
-                            {currentWeatherData.current.condition.text}
-                        </p>
+                        <p className={classes.condition}>{text}</p>
                     </div>
 
                     <div className={classes.imgContainer}>
-                        <img
-                            src={currentWeatherData.current.condition.icon.replace(
-                                "64x64",
-                                "128x128"
-                            )}
-                        />
+                        <img src={icon.replace("64x64", "128x128")} />
                     </div>
                 </div>
                 <div className={classes.todaysForecast}>
-                    <h3>Today's Forecast</h3>
+                    <h3>{t("todaysForecast")}</h3>
                     <div>
                         {hours.map((hour) => (
                             <HourlyBreakdown
@@ -101,61 +110,62 @@ export default function Weather({
 
                 <div className={classes.airConditions}>
                     <div className={classes.airConditionsTitle}>
-                        <h3>Air Conditions</h3>
-                        <button type="button">See more</button>
+                        <h3>{t("airConditions")}</h3>
+                        <button type="button" onClick={showMoreClickHandler}>
+                            {t("showMore")}
+                        </button>
                     </div>
                     <div className={classes.airConditionsInfo}>
                         <div className={classes.airConditionsInfoSegment}>
                             <div className={classes.conditionItem}>
                                 <p className={classes.conditionLabel}>
-                                    <img src={thermometerImg} /> Feels Like
+                                    <img src={thermometerImg} />
+                                    {t("feelsLike")}
                                 </p>
                                 <p className={classes.conditionValue}>
-                                    {degreesState === "C"
-                                        ? `${currentWeatherData.current.feelslike_c} °C`
-                                        : `${currentWeatherData.current.feelslike_f} °F`}
+                                    {feelsLike}
                                 </p>
                             </div>
                             <div className={classes.conditionItem}>
                                 <p className={classes.conditionLabel}>
-                                    <img src={windImg} /> Wind
+                                    <img src={windImg} /> {t("wind")}
                                 </p>
                                 <p className={classes.conditionValue}>
-                                    {degreesState === "C"
-                                        ? `${currentWeatherData.current.wind_kph} km/h`
-                                        : `${currentWeatherData.current.wind_mph} mph`}
+                                    {windSpeed}
                                 </p>
                             </div>
                         </div>
                         <div className={classes.airConditionsInfoSegment}>
                             <div className={classes.conditionItem}>
                                 <p className={classes.conditionLabel}>
-                                    <img src={waterDropImg} /> Chance of Rain
+                                    <img src={waterDropImg} />
+                                    {t("chanceOfRain")}
                                 </p>
                                 <p className={classes.conditionValue}>
-                                    {`${currentWeatherData.forecast.forecastday[0].day.daily_chance_of_rain}%`}
+                                    {`${daily_chance_of_rain}%`}
                                 </p>
                             </div>
                             <div className={classes.conditionItem}>
                                 <p className={classes.conditionLabel}>
-                                    <img src={sunImg} /> UV Index
+                                    <img src={sunImg} /> {t("uvIndex")}
                                 </p>
-                                <p className={classes.conditionValue}>
-                                    {currentWeatherData.current.uv}
-                                </p>
+                                <p className={classes.conditionValue}>{uv}</p>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                {/* <SeeMore
-                    currentWeatherData={currentWeatherData}
-                    degreesState={degreesState}
-                /> */}
             </div>
+            {showMoreOpen && (
+                <Modal onDismiss={onDismiss}>
+                    <SeeMore
+                        currentWeatherData={currentWeatherData}
+                        degreesState={degreesState}
+                    />
+                </Modal>
+            )}
 
             <div className={classes.sevenDayForecast}>
-                <h3>7-Day Forecast</h3>
+                <h3>{t("sevenDayForecast")}</h3>
                 {days.map((day) => (
                     <DailyBreakdown
                         key={day}

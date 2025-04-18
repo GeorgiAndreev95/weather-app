@@ -1,6 +1,5 @@
 .mainSection {
     display: flex;
-    /* flex-direction: column; */
     justify-content: center;
     width: 80%;
     max-width: 80%;
@@ -105,7 +104,7 @@
     text-align: center;
     color: #163da8;
     height: 2.1rem;
-    width: 5.5rem;
+    width: 6rem;
     border-radius: 12px;
     background: white;
 }

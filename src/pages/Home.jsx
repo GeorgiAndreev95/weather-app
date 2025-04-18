@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-import Header from "../components/Header";
-import Weather from "../components/Weather";
+import Header from "../components/Header/Header";
+import Weather from "../components/Weather/Weather";
 
 function Home() {
     const [currentSelectedCity, setCurrentSelectedCity] = useState(undefined);

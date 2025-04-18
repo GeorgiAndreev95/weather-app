@@ -9,9 +9,7 @@ export const getForecast = async (cityName, coutryName) => {
 
     if (language !== "en") {
         url += `&lang=${language}`;
-        console.log("Hi");
     }
-    console.log(url);
 
     try {
         const { data } = await axiosInstance.get(url);
