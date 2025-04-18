@@ -44,17 +44,11 @@
     background: white;
     border-radius: 18px;
     width: 16rem;
+    margin-right: 2rem;
 }
 
 .searchFormActive {
     border-radius: 18px 18px 0 0;
-}
-
-.searchForm:focus-within,
-.searchForm:hover {
-    outline: none;
-    border-color: #eb7f49;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 }
 
 .icon {
@@ -118,10 +112,11 @@
     font-size: 1rem;
     text-align: center;
     color: #163da8;
+    background: white;
     height: 2.1rem;
     width: 4.2rem;
     border-radius: 12px;
-    background: white;
+    margin-right: 1rem;
 }
 
 .degreeButton:hover {
@@ -130,4 +125,49 @@
 
 .degreeButton:active {
     background: rgb(240, 240, 240);
+}
+
+.languageButtonLeft {
+    all: unset;
+    font-family: "Roboto", sans-serif;
+    font-weight: 450;
+    font-size: 1rem;
+    text-align: center;
+    color: #163da8;
+    background: white;
+    height: 2.1rem;
+    width: 2.2rem;
+    border-right: 1px solid #163da8;
+    border-radius: 12px 0 0 12px;
+}
+
+.languageButtonLeft:hover {
+    cursor: pointer;
+}
+.languageButtonLeft:active {
+    background: rgb(240, 240, 240);
+}
+
+.languageButtonRight {
+    all: unset;
+    font-family: "Roboto", sans-serif;
+    font-weight: 450;
+    font-size: 1rem;
+    text-align: center;
+    color: #163da8;
+    background: white;
+    height: 2.1rem;
+    width: 2.2rem;
+    border-left: 1px solid #163da8;
+    border-radius: 0 12px 12px 0;
+}
+.languageButtonRight:hover {
+    cursor: pointer;
+}
+.languageButtonRight:active {
+    background: rgb(240, 240, 240);
+}
+
+.selected {
+    color: rgb(255, 177, 0);
 }

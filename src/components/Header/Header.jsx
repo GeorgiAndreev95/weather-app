@@ -21,6 +21,7 @@ export default function Header({
     const [focusedIndex, setFocusedIndex] = useState(-1);
     const [suggestionResults, setSuggestionResults] = useState([]);
     const [inputDisplayValue, setInputDisplayValue] = useState("");
+    const [isSelected, setIsSelected] = useState(false);
 
     useEffect(() => {
         if (inputValue.length > 0) {
@@ -91,6 +92,10 @@ export default function Header({
         }
     };
 
+    const selectLanguageHandler = () => {
+        setIsSelected((currValue) => !currValue);
+    };
+
     const { changeSelectedLanguage } = useLanguage();
 
     return (
@@ -99,22 +104,6 @@ export default function Header({
                 <img src={image} alt="A picture of the sun" />
 
                 <h1 onClick={handleGoHome}>{t("headerTitle")}</h1>
-                <button
-                    onClick={() => {
-                        changeSelectedLanguage("bg");
-                        onToggle();
-                    }}
-                >
-                    BG
-                </button>
-                <button
-                    onClick={() => {
-                        changeSelectedLanguage("en");
-                        onToggle();
-                    }}
-                >
-                    EN
-                </button>
             </div>
             <div className={classes.menu}>
                 <form
@@ -200,6 +189,34 @@ export default function Header({
                         >
                             °F
                         </span>
+                    </button>
+                    <button
+                        className={
+                            isSelected
+                                ? `${classes.selected} ${classes.languageButtonLeft}`
+                                : classes.languageButtonLeft
+                        }
+                        onClick={() => {
+                            changeSelectedLanguage("bg");
+                            onToggle();
+                            selectLanguageHandler();
+                        }}
+                    >
+                        BG
+                    </button>
+                    <button
+                        className={
+                            !isSelected
+                                ? `${classes.selected} ${classes.languageButtonRight}`
+                                : classes.languageButtonRight
+                        }
+                        onClick={() => {
+                            changeSelectedLanguage("en");
+                            onToggle();
+                            selectLanguageHandler();
+                        }}
+                    >
+                        EN
                     </button>
                 </div>
             </div>
