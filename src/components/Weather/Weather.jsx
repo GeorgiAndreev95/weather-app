@@ -7,7 +7,7 @@ import waterDropImg from "../../assets/water-drop.svg";
 import windImg from "../../assets/wind.svg";
 import sunImg from "../../assets/sun-icon.svg";
 
-import { getForecast } from "../../services/weatherService";
+import { useGetForecast } from "../../services/weatherService";
 import HourlyBreakdown from "../HourlyBreakdown/HourlyBreakdown";
 import DailyBreakdown from "../DailyBreakdown/DailyBreakdown";
 import SeeMore from "../SeeMore/SeeMore";
@@ -20,7 +20,10 @@ export default function Weather({
     error,
 }) {
     const { t } = useTranslation();
-    const [currentWeatherData, setCurrentWeatherData] = useState(null);
+    const { data: currentWeatherData, refetch } = useGetForecast(
+        cityName,
+        countryName
+    );
     const [showMoreOpen, setShowMoreOpen] = useState(false);
 
     const lng = localStorage.getItem("lng");
@@ -36,18 +39,8 @@ export default function Weather({
     };
 
     useEffect(() => {
-        if (!cityName) {
-            return;
-        }
-
-        const fetchCurrentWeatherData = async () => {
-            const response = await getForecast(cityName, countryName);
-
-            setCurrentWeatherData(response);
-        };
-
-        fetchCurrentWeatherData();
-    }, [cityName, countryName, lng]);
+        refetch();
+    }, [refetch, lng, cityName, countryName]);
 
     if (error) {
         return <p style={{ color: "red" }}>{error}</p>;

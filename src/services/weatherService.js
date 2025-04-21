@@ -1,3 +1,5 @@
+import { useQuery } from "@tanstack/react-query";
+
 import axiosInstance from "../axiosInstance";
 
 const key = import.meta.env.VITE_WEATHER_API_KEY;
@@ -32,4 +34,19 @@ export const getAutocomplete = async (cityName) => {
         console.log(error);
         throw error;
     }
+};
+
+export const useGetForecast = (cityName, coutryName) => {
+    return useQuery({
+        queryKey: ["getForecast"],
+        queryFn: () => getForecast(cityName, coutryName),
+    });
+};
+
+export const useGetAutocomplete = (cityName) => {
+    return useQuery({
+        queryKey: ["getAutocomplete"],
+        queryFn: () => getAutocomplete(cityName),
+        enabled: !!cityName && cityName.trim().length > 0,
+    });
 };

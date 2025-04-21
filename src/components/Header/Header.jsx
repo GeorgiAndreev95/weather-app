@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import classes from "./Header.module.css";
 import image from "../../assets/sun-flare.png";
-import { getAutocomplete } from "../../services/weatherService";
+import { useGetAutocomplete } from "../../services/weatherService";
 import useLanguage from "../../hooks/useLanguage";
+import queryClient from "../../queryClient";
 
 export default function Header({
     onSwapHandler,
@@ -19,21 +20,10 @@ export default function Header({
     const { t } = useTranslation();
     const lastChange = useRef();
     const [focusedIndex, setFocusedIndex] = useState(-1);
-    const [suggestionResults, setSuggestionResults] = useState([]);
     const [inputDisplayValue, setInputDisplayValue] = useState("");
     const lng = localStorage.getItem("lng");
 
-    useEffect(() => {
-        if (inputValue.length > 0) {
-            const fetchAutocompleteSuggestions = async () => {
-                const response = await getAutocomplete(inputValue);
-
-                setSuggestionResults(response);
-            };
-
-            fetchAutocompleteSuggestions();
-        }
-    }, [inputValue]);
+    const { data: suggestionResults = [] } = useGetAutocomplete(inputValue);
 
     const handleChange = (event) => {
         setInputValue("");
@@ -48,21 +38,17 @@ export default function Header({
         lastChange.current = setTimeout(() => {
             setInputValue(value);
         }, 500);
-
-        if (value.length === 0) {
-            setSuggestionResults([]);
-        }
     };
 
     const handleClick = (cityName, countryName) => {
         setCurrentSelectedCity(cityName);
         setCurrentSelectedCountry(countryName);
-        setSuggestionResults([]);
         setInputDisplayValue("");
+        queryClient.setQueryData(["getAutocomplete"], []);
+        console.log(countryName, cityName);
     };
 
     const handleGoHome = () => {
-        setSuggestionResults([]);
         setInputValue("");
         setInputDisplayValue("");
         onGoHome();

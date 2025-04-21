@@ -4,17 +4,21 @@ import Header from "../components/Header/Header";
 import Weather from "../components/Weather/Weather";
 
 function Home() {
+    const deg = localStorage.getItem("degrees");
     const [currentSelectedCity, setCurrentSelectedCity] = useState(undefined);
     const [currentSelectedCountry, setCurrentSelectedCountry] =
         useState(undefined);
     const [inputValue, setInputValue] = useState("");
-    const [degreesState, setDegreesState] = useState("C");
+    const [degreesState, setDegreesState] = useState(deg ? deg : "C");
     const [error, setError] = useState(null);
     const setToggle = useState(true)[1];
 
     const onSwapHandler = () => {
-        setDegreesState((prevState) => (prevState === "C" ? "F" : "C"));
-        return degreesState;
+        const nextState = degreesState === "C" ? "F" : "C";
+
+        setDegreesState(nextState);
+        localStorage.setItem("degrees", nextState);
+        console.log(nextState);
     };
 
     const handleToggle = () => {
@@ -56,12 +60,14 @@ function Home() {
                 onGoHome={handleGeolocation}
                 onToggle={handleToggle}
             />
-            <Weather
-                error={error}
-                cityName={currentSelectedCity}
-                countryName={currentSelectedCountry}
-                degreesState={degreesState}
-            />
+            {currentSelectedCity && (
+                <Weather
+                    error={error}
+                    cityName={currentSelectedCity}
+                    countryName={currentSelectedCountry}
+                    degreesState={degreesState}
+                />
+            )}
         </>
     );
 }

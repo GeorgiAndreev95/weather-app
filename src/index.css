@@ -15,6 +15,10 @@
     --accent-color: linear-gradient(150deg, #0d2b7c, #8bb3fd);
 }
 
+#root {
+    height: 1200px;
+}
+
 html {
     height: 100%;
     width: 100%;
