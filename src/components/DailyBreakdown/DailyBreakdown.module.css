@@ -29,3 +29,19 @@
 .degrees {
     width: 85px;
 }
+
+@media (max-width: 1170px) {
+    .daily {
+        width: 95%;
+    }
+
+    .daily > div {
+        margin-left: 16px;
+        width: 160px;
+    }
+
+    .degrees {
+        margin-left: 2rem;
+        width: 80px;
+    }
+}

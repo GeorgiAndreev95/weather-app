@@ -159,14 +159,16 @@ export default function Weather({
 
             <div className={classes.sevenDayForecast}>
                 <h3>{t("sevenDayForecast")}</h3>
-                {days.map((day) => (
-                    <DailyBreakdown
-                        key={day}
-                        currentWeatherData={currentWeatherData}
-                        degreesState={degreesState}
-                        day={day}
-                    />
-                ))}
+                <ul>
+                    {days.map((day) => (
+                        <DailyBreakdown
+                            key={day}
+                            currentWeatherData={currentWeatherData}
+                            degreesState={degreesState}
+                            day={day}
+                        />
+                    ))}
+                </ul>
             </div>
         </main>
     );

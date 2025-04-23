@@ -44,8 +44,8 @@ export default function Header({
         setCurrentSelectedCity(cityName);
         setCurrentSelectedCountry(countryName);
         setInputDisplayValue("");
+        setInputValue("");
         queryClient.setQueryData(["getAutocomplete"], []);
-        console.log(countryName, cityName);
     };
 
     const handleGoHome = () => {

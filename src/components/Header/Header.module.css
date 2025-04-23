@@ -9,12 +9,6 @@
     overflow: visible;
 }
 
-@media (width <= 1920px) {
-    .header {
-        max-width: 70%;
-    }
-}
-
 .header h1 {
     color: white;
     cursor: pointer;
@@ -35,7 +29,6 @@
     display: flex;
     justify-content: space-between;
     min-width: 350px;
-    /* height: 34px; */
 }
 
 .searchForm {
@@ -171,4 +164,65 @@
 
 .selected {
     color: rgb(255, 177, 0);
+}
+
+@media (max-width: 1170px) {
+    .header {
+        flex-direction: column;
+        justify-content: center;
+        height: auto;
+        max-width: 90%;
+        padding: 0.5rem;
+    }
+
+    .title {
+        flex: 1;
+        justify-content: flex-start;
+        width: 100%;
+        margin-right: 30px;
+    }
+
+    .title img {
+        height: 3rem;
+        width: 3rem;
+    }
+
+    .title h1 {
+        font-size: 1.5rem;
+    }
+
+    .menu {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+        width: 100%;
+        min-width: 300px;
+        position: relative;
+        top: -45px;
+    }
+
+    .searchForm {
+        width: 100%;
+        margin-right: 0;
+        margin-top: 0.5rem;
+    }
+
+    .degreeButtons {
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .degreeButton {
+        height: 1.8rem;
+        width: 3.6rem;
+        margin-right: 0.5rem;
+    }
+
+    .languageButtonLeft,
+    .languageButtonRight {
+        height: 1.8rem;
+        width: 2rem;
+    }
 }

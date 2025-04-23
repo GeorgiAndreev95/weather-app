@@ -13,7 +13,7 @@
     justify-content: space-between;
     align-items: center;
     width: 972px;
-    min-width: 850px;
+    /* min-width: 850px; */
     max-width: 80%;
     height: 250px;
     color: white;
@@ -54,7 +54,6 @@
     margin: 2rem auto;
     height: 300px;
     width: 972px;
-    min-width: 850px;
     max-width: 80%;
     border-radius: 24px;
     background: var(--accent-color);
@@ -80,7 +79,7 @@
     margin-top: 0;
     height: 300px;
     width: 972px;
-    min-width: 850px;
+    /* min-width: 850px; */
     max-width: 80%;
     color: white;
     border-radius: 24px;
@@ -239,5 +238,94 @@
     }
     100% {
         box-shadow: 0 0 10px 5px rgba(255, 217, 61, 0.8);
+    }
+}
+
+@media (width < 1500px) {
+    .mainSection {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .currentDaySection,
+    .todaysForecast,
+    .airConditions {
+        width: 750px;
+    }
+
+    .sevenDayForecast {
+        margin: 2rem auto;
+        width: 750px;
+        min-width: 700px;
+    }
+
+    .sevenDayForecast ul {
+        margin: 1rem auto;
+    }
+}
+
+@media (max-width: 1170px) {
+    .currentDaySection,
+    .todaysForecast,
+    .airConditions,
+    .sevenDayForecast {
+        max-width: 95%;
+        min-width: 0;
+        margin: 1rem auto;
+    }
+
+    .mainSection {
+        max-width: 100%;
+    }
+
+    .cityName {
+        font-size: 1.5rem;
+    }
+
+    .dataContainerTemp {
+        font-size: 35px;
+    }
+
+    .condition {
+        font-size: 18px;
+    }
+
+    .imgContainer {
+        margin-right: 0;
+    }
+
+    .todaysForecast {
+        height: auto;
+        padding: 32px;
+    }
+
+    .todaysForecast h3 {
+        margin-left: 0;
+    }
+
+    .todaysForecast > div {
+        flex-direction: column;
+        margin-top: 0.5rem;
+    }
+
+    .airConditions {
+        margin-bottom: 0;
+    }
+
+    .airConditionsTitle {
+        width: 85%;
+    }
+
+    .airConditionsInfo {
+        width: 100%;
+        margin-left: 3rem;
+    }
+
+    .airConditionsInfoSegment {
+        flex-wrap: wrap;
+    }
+
+    .conditionItem {
+        flex: 0 0 50%;
     }
 }
