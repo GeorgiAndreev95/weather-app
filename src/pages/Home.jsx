@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import Header from "../components/Header/Header";
 import Weather from "../components/Weather/Weather";
+import ErrorComponent from "../components/ErrorComponent/ErrorComponent";
 
 function Home() {
     const deg = localStorage.getItem("degrees");
@@ -31,14 +32,25 @@ function Home() {
             return;
         }
 
-        navigator.geolocation.getCurrentPosition(
+        navigator.geolocation.watchPosition(
             (position) => {
                 const { latitude, longitude } = position.coords;
                 setCurrentSelectedCity(`${latitude},${longitude}`);
                 setCurrentSelectedCountry(undefined);
+                console.log("test");
+                setError(null);
             },
             (err) => {
-                setError(`Error: ${err.message}`);
+                if (err.code === err.PERMISSION_DENIED) {
+                    setError(
+                        "Location access denied. Please enable location services or search manually."
+                    );
+                } else {
+                    setError(
+                        "Could not get location. Please try again or search manually."
+                    );
+                }
+                // setError(`Error: ${err.message}`);
             }
         );
     };
@@ -59,10 +71,11 @@ function Home() {
                 degreesState={degreesState}
                 onGoHome={handleGeolocation}
                 onToggle={handleToggle}
+                setError={setError}
             />
-            {currentSelectedCity && (
+            {error && <ErrorComponent error={error} />}
+            {!error && currentSelectedCity && (
                 <Weather
-                    error={error}
                     cityName={currentSelectedCity}
                     countryName={currentSelectedCountry}
                     degreesState={degreesState}

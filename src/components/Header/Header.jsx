@@ -16,6 +16,7 @@ export default function Header({
     degreesState,
     onGoHome,
     onToggle,
+    setError,
 }) {
     const { t } = useTranslation();
     const lastChange = useRef();
@@ -45,6 +46,7 @@ export default function Header({
         setCurrentSelectedCountry(countryName);
         setInputDisplayValue("");
         setInputValue("");
+        setError(null);
         queryClient.setQueryData(["getAutocomplete"], []);
     };
 

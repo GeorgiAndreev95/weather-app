@@ -13,12 +13,7 @@ import DailyBreakdown from "../DailyBreakdown/DailyBreakdown";
 import SeeMore from "../SeeMore/SeeMore";
 import Modal from "../Modal/Modal";
 
-export default function Weather({
-    cityName,
-    countryName,
-    degreesState,
-    error,
-}) {
+export default function Weather({ cityName, countryName, degreesState }) {
     const { t } = useTranslation();
     const { data: currentWeatherData, refetch } = useGetForecast(
         cityName,
@@ -41,10 +36,6 @@ export default function Weather({
     useEffect(() => {
         refetch();
     }, [refetch, lng, cityName, countryName]);
-
-    if (error) {
-        return <p style={{ color: "red" }}>{error}</p>;
-    }
 
     if (!currentWeatherData) {
         return (

@@ -1,0 +1,14 @@
+.error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error p {
+    color: rgb(255, 0, 0);
+    border: 1px solid red;
+    border-radius: 8px;
+    background: rgb(255, 208, 208);
+    padding: 16px;
+    width: 90%;
+}
