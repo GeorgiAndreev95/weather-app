@@ -89,3 +89,37 @@
 .astroChild .item {
     flex: 0 0 50%;
 }
+
+@media (max-width: 1170px) {
+    .seeMore {
+        width: 100%;
+    }
+
+    .item {
+        margin: 0.4rem;
+        font-size: 15px;
+    }
+
+    .images {
+        height: 1.5rem;
+        width: 1.5rem;
+    }
+
+    .wind {
+        margin-top: 1rem;
+    }
+
+    .wind,
+    .atmosphere,
+    .rain,
+    .astro {
+        margin-bottom: 0;
+    }
+
+    .windChild,
+    .atmosphereChild,
+    .rainChild,
+    .astroChild {
+        flex-direction: column;
+    }
+}

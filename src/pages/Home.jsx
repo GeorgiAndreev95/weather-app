@@ -50,7 +50,6 @@ function Home() {
                         "Could not get location. Please try again or search manually."
                     );
                 }
-                // setError(`Error: ${err.message}`);
             }
         );
     };

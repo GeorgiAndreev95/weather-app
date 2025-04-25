@@ -209,7 +209,7 @@ export default function SeeMore({ degreesState, currentWeatherData }) {
                     <div className={classes.item}>
                         <p>
                             <img src={sunImg} className={classes.images} />
-                            {t("uvIndex")}
+                            {t("uvIndexColon")}
                         </p>
                         <p>{uv}</p>
                     </div>

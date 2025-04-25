@@ -11,4 +11,6 @@
     background: rgb(255, 208, 208);
     padding: 16px;
     width: 90%;
+    max-width: 1000px;
+    text-align: center;
 }
