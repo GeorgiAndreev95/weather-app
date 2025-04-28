@@ -16,7 +16,7 @@
     border: none;
 }
 
-@media (width <= 1170px) {
+@media (max-width: 1170px) {
     .hourly {
         margin: 0;
         border-bottom: 2px solid rgb(235, 235, 235);

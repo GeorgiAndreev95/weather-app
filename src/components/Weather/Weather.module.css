@@ -241,7 +241,7 @@
     }
 }
 
-@media (width < 1500px) {
+@media (max-width: 1500px) {
     .mainSection {
         flex-direction: column;
         width: 100%;
