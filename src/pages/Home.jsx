@@ -32,12 +32,11 @@ function Home() {
             return;
         }
 
-        navigator.geolocation.watchPosition(
+        navigator.geolocation.getCurrentPosition(
             (position) => {
                 const { latitude, longitude } = position.coords;
                 setCurrentSelectedCity(`${latitude},${longitude}`);
                 setCurrentSelectedCountry(undefined);
-                console.log("test");
                 setError(null);
             },
             (err) => {
