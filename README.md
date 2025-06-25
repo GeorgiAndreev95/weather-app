@@ -22,6 +22,19 @@ Utilizes HTML, CSS (CSS Components), JavaScript, React, Axios, i18next, TanStack
 
 **The Homepage in Desktop/Mobile view**
 
-**The auto-complete suggestions dropdown**
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/3e118bf7-ee8c-4783-8167-46287ef72e63" alt="Homepage - desktop" />
+  <br />
+  <img src="https://github.com/user-attachments/assets/dc634056-c931-4ff6-90d6-4c50f47ed538" alt="Homepage - mobile" />
+</div>
+
+<br />
+<br />
 
 **The "Show more" modal window in Desktop/Mobile view**
+
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/d81ef4bb-a7e9-4c2b-a7fa-aad59baab72f" alt="Modal - desktop" />
+  <br />
+  <img src="https://github.com/user-attachments/assets/421da6ef-f512-40d4-896c-45f192dc5c50" alt="Modal - mobile" />
+</div>
