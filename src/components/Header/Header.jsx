@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import classes from "./Header.module.css";
@@ -22,6 +22,8 @@ export default function Header({
     const lastChange = useRef();
     const [focusedIndex, setFocusedIndex] = useState(-1);
     const [inputDisplayValue, setInputDisplayValue] = useState("");
+    const [isInputFocused, setIsInputFocused] = useState(false);
+    const formRef = useRef(null);
     const lng = localStorage.getItem("lng");
 
     const { data: suggestionResults = [] } = useGetAutocomplete(inputValue);
@@ -82,6 +84,20 @@ export default function Header({
 
     const { changeSelectedLanguage } = useLanguage();
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (formRef.current && !formRef.current.contains(event.target)) {
+                setIsInputFocused(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
     return (
         <div className={classes.header}>
             <div className={classes.title}>
@@ -91,8 +107,9 @@ export default function Header({
             </div>
             <div className={classes.menu}>
                 <form
+                    ref={formRef}
                     className={`${classes.searchForm} ${
-                        suggestionResults.length > 0
+                        isInputFocused && suggestionResults.length > 0
                             ? classes.searchFormActive
                             : ""
                     }`}
@@ -124,10 +141,11 @@ export default function Header({
                         autoComplete="off"
                         onChange={handleChange}
                         onKeyDown={keyDownHandler}
+                        onFocus={() => setIsInputFocused(true)}
                         value={inputDisplayValue}
                         required
                     />
-                    {suggestionResults.length > 0 && (
+                    {isInputFocused && suggestionResults.length > 0 && (
                         <ul className={classes.suggestions}>
                             {suggestionResults.map((city, index) => (
                                 <li

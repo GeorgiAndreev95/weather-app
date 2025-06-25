@@ -1,12 +1,27 @@
-# React + Vite
+# Weather Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The goal of this project was to create a single-page weather web application using the [Weather API](https://www.weatherapi.com/).
 
-Currently, two official plugins are available:
+Utilizes HTML, CSS (CSS Components), JavaScript, React, Axios, i18next, TanStack/React Query
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Features
 
-## Expanding the ESLint configuration
+-   The application uses geolocation and once it is allowed, it will show the current weather conditions for the city where the user is located. If the geolocation is blocked, the app throws an error and allows users to search manually for a city using the search bar in the header.
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+-   The search field utilizes debouncing and returns auto-complete suggestions.
+
+-   Once a city is selected, the user will be presented with the current temperature and conditions, a breakdown of the temperature/conditions throughout the day in 3-hour intervals, additional information about the air conditions including wind speeds, chance of rain, etc. and a 7-day forecast.
+
+-   In the air conditions tab the user can click a "Show more" button which opens a modal with additional information including wind and atmospheric conditions, sunrise and sunset times, etc.
+
+-   From the header the user can also toggle between °C / °F (metric and imperial system). They can also switch languages and choose between English and Bulgarian. Additionally if geolocation is enabled, clicking the "Weather" title, activates geolocation again and dispays the user's "home" city.
+
+-   The application is responsive using media queries.
+
+### Screenshots
+
+**The Homepage in Desktop/Mobile view**
+
+**The auto-complete suggestions dropdown**
+
+**The "Show more" modal window in Desktop/Mobile view**
